@@ -2,6 +2,7 @@
 
 source 'http://rubygems.org'
 
+gem 'avro_turf'
 gem 'karafka'
 gem 'rake'
 gem 'ruby-kafka'
