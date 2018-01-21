@@ -28,10 +28,18 @@ cd karafka_json
 bundle exec karafka server
 ```
 
+## Running Karafka AVRO
+
+```
+cd karafka_avro
+bundle exec karafka server
+```
+
 ## Results
 
 Each test is batch of 100k records, 10 batches per test.
 
-| Implementation | Mean    | Std. Deviaton  | Records/s |
-| -------------- | :-----: | :------------: | :-------: |
-| Karafka JSON   | 6.5013s | 0.0885 (1.36%) | 15 382    |
+| Implementation | Mean    | Std. Deviaton  | Records/s | Slower |
+| -------------- | :-----: | :------------: | :-------: | :----: |
+| Karafka JSON   | 6.5457s | 0.1285 (1.96%) | 15 277    | 1.00x  |
+| Karafka AVRO   | 7.1797s | 0.1029 (1.43%) | 13 928    | 1.10x  |
