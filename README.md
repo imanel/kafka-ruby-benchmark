@@ -43,3 +43,8 @@ Each test is batch of 100k records, 10 batches per test.
 | -------------- | :-----: | :------------: | :-------: | :----: |
 | Karafka JSON   | 6.5457s | 0.1285 (1.96%) | 15 277    | 1.00x  |
 | Karafka AVRO   | 7.1797s | 0.1029 (1.43%) | 13 928    | 1.10x  |
+
+## TODO
+
+- [ ] Add results for [Phobos](https://github.com/klarna/phobos)
+- [ ] Add results for [Racecar](https://github.com/zendesk/racecar)
