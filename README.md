@@ -15,6 +15,26 @@ Each test is batch of 100k records, at least 10 batches per test.
 | Racecar JSON   | 3.2057s | 0.1306 (4.07%) | 31 194 | 1.30x         | 1.00x              |
 | Racecar AVRO   | 9.0419s | 0.1430 (1.58%) | 11 060 | 3.67x         | 2.82x              |
 
+Benchmark of JSON vs AVRO, size 1 used for benchmarks above.
+
+|                                  | user      | system   | total     | real      |
+| -------------------------------- | --------: | -------: | --------: | --------: |
+| JSON size 1:                     |  0.280000 | 0.000000 |  0.280000 |  0.285331 |
+| AVRO explicit schema size 1:     |  5.410000 | 0.010000 |  5.420000 |  5.467514 |
+| JSON implicit schema size 1:     |  5.240000 | 0.000000 |  5.240000 |  5.246887 |
+| JSON size 10:                    |  0.260000 | 0.000000 |  0.260000 |  0.259881 |
+| AVRO explicit schema size 10:    |  5.340000 | 0.010000 |  5.350000 |  5.345877 |
+| JSON implicit schema size 10:    |  5.460000 | 0.000000 |  5.460000 |  5.481632 |
+| JSON size 100:                   |  0.520000 | 0.010000 |  0.530000 |  0.529220 |
+| AVRO explicit schema size 100:   |  5.410000 | 0.000000 |  5.410000 |  5.413890 |
+| JSON implicit schema size 100:   |  5.440000 | 0.000000 |  5.440000 |  5.447352 |
+| JSON size 1000:                  |  2.450000 | 0.110000 |  2.560000 |  2.562496 |
+| AVRO explicit schema size 1000:  |  5.650000 | 0.010000 |  5.660000 |  5.663500 |
+| JSON implicit schema size 1000:  |  5.710000 | 0.000000 |  5.710000 |  5.715120 |
+| JSON size 10_000:                | 22.660000 | 1.850000 | 24.510000 | 24.578918 |
+| AVRO explicit schema size 10000: |  7.470000 | 0.210000 |  7.680000 |  7.689758 |
+| JSON implicit schema size 10000: |  7.660000 | 0.200000 |  7.860000 |  7.890285 |
+
 ## Running Kafka
 
 This Docker image will expose Kafka on port `9092` and Zookeeper on port `2181`.

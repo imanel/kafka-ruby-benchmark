@@ -1,4 +1,5 @@
 require 'avro_turf'
+require 'benchmark'
 require 'json'
 require 'kafka'
 
@@ -21,6 +22,35 @@ namespace :bench do
         producer.produce(message_json, topic: 'kafka_bench_json')
       end
       producer.deliver_messages
+    end
+  end
+
+  desc 'Benchmark JSON vs AVRO'
+  task :avro do
+    N = 100_000
+
+    Benchmark.bm(30) do |x|
+      sizes = [1, 10, 100, 1_000, 10_000]
+      avro = AvroTurf.new(schemas_path: File.join(__dir__, 'avro_schema'))
+
+      sizes.each do |size|
+        message = {
+          'street' => '1st st.' * size,
+          'city' => 'Citytown' * size
+        }
+        message_json = message.to_json
+        message_avro = avro.encode(message, schema_name: 'address')
+
+        x.report("JSON size #{size}:") do
+          N.times { JSON.parse(message_json) }
+        end
+        x.report("AVRO explicit schema size #{size}:") do
+          N.times { avro.decode(message_avro, schema_name: 'address') }
+        end
+        x.report("JSON implicit schema size #{size}:") do
+          N.times { avro.decode(message_avro) }
+        end
+      end
     end
   end
 end
