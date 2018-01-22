@@ -4,18 +4,14 @@
 
 Each test is batch of 100k records, at least 10 batches per test.
 
-| Implementation | Mean     | Std. Deviaton  | Ops/s  | Slower (Base) | Slower (Framework) |
-| -------------- | -------- | :------------: | :----: | :-----------: | :----------------: |
-| Kafka JSON     |  2.4647s | 0.1449 (5.88%) | 40 573 | 1.00x         | 1.00x              |
-| Kafka AVRO     |  8.2047s | 0.1313 (1.60%) | 12 188 | 3.33x         | 3.33x              |
-| Karafka JSON   |  7.9192s | 0.2359 (2.98%) | 12 627 | 3.21x         | 1.00x              |
-| Karafka AVRO   | 15.3608s | 0.2132 (1.39%) |  6 510 | 6.23x         | 1.94x              |
-| Phobos JSON    |  2.6068s | 0.1234 (4.73%) | 38 361 | 1.06x         | 1.00x              |
-| Phobos AVRO    |  8.2769s | 0.1474 (1.78%) | 12 082 | 3.36x         | 3.17x              |
-| Racecar JSON   |  3.2057s | 0.1306 (4.07%) | 31 194 | 1.30x         | 1.00x              |
-| Racecar AVRO   |  9.0419s | 0.1430 (1.58%) | 11 060 | 3.67x         | 2.82x              |
+| Implementation   | Mean     | Std. Deviaton  | Ops/s  | Slower (Base) | Slower (Framework) |
+| ---------------- | -------- | :------------: | :----: | :-----------: | :----------------: |
+| Kafka (Single)   |  2.4647s | 0.1449 (5.88%) | 40 573 | 1.00x         | 1.00x              |
+| Karafka (Single) |  7.9192s | 0.2359 (2.98%) | 12 627 | 3.21x         | 1.00x              |
+| Phobos           |  2.6068s | 0.1234 (4.73%) | 38 361 | 1.06x         | 1.00x              |
+| Racecar          |  3.2057s | 0.1306 (4.07%) | 31 194 | 1.30x         | 1.00x              |
 
-Benchmark of JSON vs AVRO, size 1 used for benchmarks above.
+Benchmark of JSON vs AVRO, size 1 of JSON used for benchmarks above. If using AVRO or large messages just adjust above results by difference.
 
 |                                  | user      | system   | total     | real      |
 | -------------------------------- | --------: | -------: | --------: | --------: |
@@ -61,58 +57,31 @@ bundle install
 bundle exec rake bench:fill_kafka
 ```
 
-## Running Kafka JSON
+## Running Kafka Single
 
 ```
 cd kafka
-bundle exec ruby json.rb
+bundle exec ruby single.rb
 ```
 
-## Running Kafka AVRO
+## Running Karafka Single
 
 ```
-cd kafka
-bundle exec ruby avro.rb
-```
-
-## Running Karafka JSON
-
-```
-cd karafka_json
+cd karafka_single
 bundle exec karafka server
 ```
 
-## Running Karafka AVRO
 
-```
-cd karafka_avro
-bundle exec karafka server
-```
-
-## Running Phobos JSON
+## Running Phobos
 
 ```
 cd phobos
 bundle exec phobos start -c config/json.yml -b json.rb
 ```
 
-## Running Phobos AVRO
-
-```
-cd phobos
-bundle exec phobos start -c config/avro.yml -b avro.rb
-```
-
-## Running Racecar JSON
+## Running Racecar
 
 ```
 cd racecar
 bundle exec racecar --require json_consumer JsonConsumer
-```
-
-## Running Racecar AVRO
-
-```
-cd racecar
-bundle exec racecar --require avro_consumer AvroConsumer
 ```

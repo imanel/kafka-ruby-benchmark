@@ -1,13 +1,12 @@
-require 'avro_turf'
+require 'json'
 require 'kafka'
 
-avro = AvroTurf.new(schemas_path: File.join(__dir__, '..', 'avro_schema'))
 kafka = Kafka.new(seed_brokers: ["127.0.0.1:9092"])
-consumer = kafka.consumer(group_id: 'kafka_avro')
-consumer.subscribe('kafka_bench_avro')
+consumer = kafka.consumer(group_id: 'kafka_json_single')
+consumer.subscribe('kafka_bench_json')
 
 consumer.each_message do |message|
-  params = avro.decode(message.value, schema_name: 'address')
+  params = JSON.parse(message.value)
   @count ||= 0
   @starting_time = Time.now if @count == 0
   @count += 1

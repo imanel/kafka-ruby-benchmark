@@ -19,7 +19,7 @@ end
 class KarafkaApp < Karafka::App
   setup do |config|
     config.kafka.seed_brokers = %w[kafka://127.0.0.1:9092]
-    config.client_id = 'karafka_json'
+    config.client_id = 'karafka_json_single'
     config.backend = :inline
     config.batch_fetching = true
     config.parser = JsonGemParser
