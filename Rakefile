@@ -2,6 +2,7 @@ require 'avro_turf'
 require 'benchmark'
 require 'json'
 require 'kafka'
+require 'multi_json'
 
 namespace :bench do
   desc 'Fill kafka with data for benchmark'
@@ -44,10 +45,13 @@ namespace :bench do
         x.report("JSON size #{size}:") do
           N.times { JSON.parse(message_json) }
         end
+        x.report("MultiJson size #{size}:") do
+          N.times { MultiJson.load(message_json) }
+        end
         x.report("AVRO explicit schema size #{size}:") do
           N.times { avro.decode(message_avro, schema_name: 'address') }
         end
-        x.report("JSON implicit schema size #{size}:") do
+        x.report("AVRO implicit schema size #{size}:") do
           N.times { avro.decode(message_avro) }
         end
       end
