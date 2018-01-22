@@ -52,15 +52,29 @@ bundle exec karafka server
 ## Running Phobos JSON
 
 ```
-cd kafka
+cd phobos
 bundle exec phobos start -c config/json.yml -b json.rb
 ```
 
 ## Running Phobos AVRO
 
 ```
-cd kafka
+cd phobos
 bundle exec phobos start -c config/avro.yml -b avro.rb
+```
+
+## Running Racecar JSON
+
+```
+cd racecar
+bundle exec racecar --require json_consumer JsonConsumer
+```
+
+## Running Racecar AVRO
+
+```
+cd racecar
+bundle exec racecar --require avro_consumer AvroConsumer
 ```
 
 ## Results
@@ -75,7 +89,5 @@ Each test is batch of 100k records, 10 batches per test.
 | Karafka AVRO   | 7.1797s | 0.1029 (1.43%) | 13 928 | 2.91x         | 1.10x              |
 | Phobos JSON    | 2.6068s | 0.1234 (4.73%) | 38 361 | 1.06x         | 1.00x              |
 | Phobos AVRO    | 8.2769s | 0.1474 (1.78%) | 12 082 | 3.36x         | 3.17x              |
-
-## TODO
-
-- [ ] Add results for [Racecar](https://github.com/zendesk/racecar)
+| Racecar JSON   | 3.2057s | 0.1306 (4.07%) | 31 194 | 1.30x         | 1.00x              |
+| Racecar AVRO   | 9.0419s | 0.1430 (1.58%) | 11 060 | 3.67x         | 2.82x              |
