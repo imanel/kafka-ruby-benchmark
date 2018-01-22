@@ -49,6 +49,20 @@ cd karafka_avro
 bundle exec karafka server
 ```
 
+## Running Phobos JSON
+
+```
+cd kafka
+bundle exec phobos start -c config/json.yml -b json.rb
+```
+
+## Running Phobos AVRO
+
+```
+cd kafka
+bundle exec phobos start -c config/avro.yml -b avro.rb
+```
+
 ## Results
 
 Each test is batch of 100k records, 10 batches per test.
@@ -59,8 +73,9 @@ Each test is batch of 100k records, 10 batches per test.
 | Kafka AVRO     | 8.2047s | 0.1313 (1.60%) | 12 188 | 3.33x         | 3.33x              |
 | Karafka JSON   | 6.5457s | 0.1285 (1.96%) | 15 277 | 2.65x         | 1.00x              |
 | Karafka AVRO   | 7.1797s | 0.1029 (1.43%) | 13 928 | 2.91x         | 1.10x              |
+| Phobos JSON    | 2.6068s | 0.1234 (4.73%) | 38 361 | 1.06x         | 1.00x              |
+| Phobos AVRO    | 8.2769s | 0.1474 (1.78%) | 12 082 | 3.36x         | 3.17x              |
 
 ## TODO
 
-- [ ] Add results for [Phobos](https://github.com/klarna/phobos)
 - [ ] Add results for [Racecar](https://github.com/zendesk/racecar)
