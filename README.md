@@ -1,4 +1,4 @@
-# Benchmark for Kafka frameworks for Ruby
+# Benchmark of Kafka frameworks for Ruby
 
 ## Running Kafka
 
@@ -21,6 +21,20 @@ bundle install
 bundle exec rake bench:fill_kafka
 ```
 
+## Running Kafka JSON
+
+```
+cd kafka
+bundle exec ruby json.rb
+```
+
+## Running Kafka AVRO
+
+```
+cd kafka
+bundle exec ruby avro.rb
+```
+
 ## Running Karafka JSON
 
 ```
@@ -39,10 +53,12 @@ bundle exec karafka server
 
 Each test is batch of 100k records, 10 batches per test.
 
-| Implementation | Mean    | Std. Deviaton  | Records/s | Slower |
-| -------------- | :-----: | :------------: | :-------: | :----: |
-| Karafka JSON   | 6.5457s | 0.1285 (1.96%) | 15 277    | 1.00x  |
-| Karafka AVRO   | 7.1797s | 0.1029 (1.43%) | 13 928    | 1.10x  |
+| Implementation | Mean    | Std. Deviaton  | Ops/s  | Slower (Base) | Slower (Framework) |
+| -------------- | :-----: | :------------: | :----: | :-----------: | :----------------: |
+| Kafka JSON     | 2.4647s | 0.1449 (5.88%) | 40 573 | 1.00x         | 1.00x              |
+| Kafka AVRO     | 8.2047s | 0.1313 (1.60%) | 12 188 | 3.33x         | 3.33x              |
+| Karafka JSON   | 6.5457s | 0.1285 (1.96%) | 15 277 | 2.65x         | 1.00x              |
+| Karafka AVRO   | 7.1797s | 0.1029 (1.43%) | 13 928 | 2.91x         | 1.10x              |
 
 ## TODO
 
