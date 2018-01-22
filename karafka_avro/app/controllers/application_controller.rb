@@ -2,6 +2,7 @@
 
 class ApplicationController < Karafka::BaseController
   def consume
+    params
     @@count ||= 0
     @@starting_time = Time.now if @@count == 0
     @@count += 1
