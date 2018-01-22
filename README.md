@@ -4,12 +4,13 @@
 
 Each test is batch of 100k records, at least 10 batches per test.
 
-| Implementation   | Mean     | Std. Deviaton  | Ops/s  | Slower (Base) | Slower (Framework) |
-| ---------------- | -------- | :------------: | :----: | :-----------: | :----------------: |
-| Kafka (Single)   |  2.4647s | 0.1449 (5.88%) | 40 573 | 1.00x         | 1.00x              |
-| Karafka (Single) |  7.9192s | 0.2359 (2.98%) | 12 627 | 3.21x         | 1.00x              |
-| Phobos           |  2.6068s | 0.1234 (4.73%) | 38 361 | 1.06x         | 1.00x              |
-| Racecar          |  3.2057s | 0.1306 (4.07%) | 31 194 | 1.30x         | 1.00x              |
+| Implementation   | Mean    | Std. Deviaton  | Ops/s  | Slower |
+| ---------------- | ------- | :------------: | :----: | :----: |
+| Kafka (Batch)    | 1.7135s | 0.1072 (6.26%) | 58 360 | 1.00x  |
+| Kafka (Single)   | 2.4647s | 0.1449 (5.88%) | 40 573 | 1.44x  |
+| Phobos           | 2.6068s | 0.1234 (4.73%) | 38 361 | 1.52x  |
+| Racecar          | 3.2057s | 0.1306 (4.07%) | 31 194 | 1.82x  |
+| Karafka (Single) | 7.9192s | 0.2359 (2.98%) | 12 627 | 4.62x  |
 
 Benchmark of JSON vs AVRO, size 1 of JSON used for benchmarks above. If using AVRO or large messages just adjust above results by difference.
 
@@ -62,6 +63,13 @@ bundle exec rake bench:fill_kafka
 ```
 cd kafka
 bundle exec ruby single.rb
+```
+
+## Running Kafka Batch
+
+```
+cd kafka
+bundle exec ruby batch.rb
 ```
 
 ## Running Karafka Single
