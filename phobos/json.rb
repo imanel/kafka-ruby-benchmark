@@ -14,10 +14,10 @@ class JsonHandler
     @@starting_time = Time.now if @@count.zero?
     @@count += 1
 
-    next unless @@count >= 100_000
-
-    time_taken = Time.now - @@starting_time
-    puts "Time taken: #{time_taken}"
-    @@count = 0
+    if @@count >= 100_000
+      time_taken = Time.now - @@starting_time
+      puts "Time taken: #{time_taken}"
+      @@count = 0
+    end
   end
 end
