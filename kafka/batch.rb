@@ -1,8 +1,14 @@
-require 'json'
-require 'kafka'
+# frozen_string_literal: true
 
-kafka = Kafka.new(seed_brokers: ["127.0.0.1:9092"])
-consumer = kafka.consumer(group_id: 'kafka_json_batch')
+%w[
+  json
+  kafka
+].each(&method(:require))
+
+ENV['KAFKA_HOST'] ||= '127.0.0.1:9092'
+
+kafka = Kafka.new(seed_brokers: [ENV['KAFKA_HOST']])
+consumer = kafka.consumer(group_id: "kafka_json_batch_#{Time.now.to_i}")
 consumer.subscribe('kafka_bench_json')
 
 consumer.each_batch do |batch|

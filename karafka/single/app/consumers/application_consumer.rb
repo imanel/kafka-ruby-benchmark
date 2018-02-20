@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApplicationController < Karafka::BaseController
+class ApplicationConsumer < Karafka::BaseConsumer
   def consume
     params
     @@count ||= 0
@@ -11,6 +11,7 @@ class ApplicationController < Karafka::BaseController
       time_taken = Time.now - @@starting_time
       puts "Time taken: #{time_taken}"
       @@count = 0
+      mark_as_consumed params
     end
   end
 end

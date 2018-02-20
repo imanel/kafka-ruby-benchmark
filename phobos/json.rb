@@ -1,5 +1,9 @@
-require 'json'
-require 'phobos'
+# frozen_string_literal: true
+
+%w[
+  json
+  phobos
+].each(&method(:require))
 
 class JsonHandler
   include Phobos::Handler

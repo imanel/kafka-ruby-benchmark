@@ -26,7 +26,7 @@ kafka:
   ssl_client_cert_key:
   # list of brokers used to initialize the client ("port:protocol")
   seed_brokers:
-    - localhost:9092
+    - <%= ENV['KAFKA_HOST'] || '127.0.0.1:9092' %>
 
 producer:
   # number of seconds a broker can wait for replicas to acknowledge
@@ -81,7 +81,7 @@ listeners:
   - handler: JsonHandler
     topic: kafka_bench_json
     # id of the group that the consumer should join
-    group_id: kafka_bench_json
+    group_id: <%= "kafka_bench_json_#{Time.now.to_i}" %>
     # Number of threads created for this listener, each thread will behave as an independent consumer.
     # They don't share any state
     max_concurrency: 1

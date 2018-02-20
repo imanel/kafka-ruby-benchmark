@@ -1,5 +1,9 @@
-require 'json'
-require 'racecar'
+# frozen_string_literal: true
+
+%w[
+  json
+  racecar
+].each(&method(:require))
 
 class JsonConsumer < Racecar::Consumer
   subscribes_to 'kafka_bench_json'
