@@ -12,14 +12,14 @@ consumer = kafka.consumer(group_id: "kafka_json_single_#{Time.now.to_i}")
 consumer.subscribe('kafka_bench_json')
 
 consumer.each_message do |message|
-  params = JSON.parse(message.value)
+  JSON.parse(message.value)
   @count ||= 0
-  @starting_time = Time.now if @count == 0
+  @starting_time = Time.now if @count.zero?
   @count += 1
 
-  if @count >= 100_000
-    time_taken = Time.now - @starting_time
-    puts "Time taken: #{time_taken}"
-    @count = 0
-  end
+  next unless @count >= 100_000
+
+  time_taken = Time.now - @starting_time
+  puts "Time taken: #{time_taken}"
+  @count = 0
 end

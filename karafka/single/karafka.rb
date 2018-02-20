@@ -23,7 +23,7 @@ class KarafkaApp < Karafka::App
       automatically_mark_as_consumed false
 
       topic :kafka_bench_json do
-        consumer ApplicationConsumer
+        consumer BenchConsumer
       end
     end
   end
