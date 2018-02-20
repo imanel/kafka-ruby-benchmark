@@ -9,7 +9,7 @@ class JsonConsumer < Racecar::Consumer
   subscribes_to 'kafka_bench_json'
 
   def process(message)
-    JSON.parse(payload)
+    JSON.parse(message.value)
     @@count ||= 0
     @@starting_time = Time.now if @@count.zero?
     @@count += 1

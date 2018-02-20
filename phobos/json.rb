@@ -8,7 +8,7 @@
 class JsonHandler
   include Phobos::Handler
 
-  def consume(payload, metadata)
+  def consume(payload, _metadata)
     JSON.parse(payload)
     @@count ||= 0
     @@starting_time = Time.now if @@count.zero?

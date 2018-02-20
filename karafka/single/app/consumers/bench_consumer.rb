@@ -4,7 +4,8 @@
 class BenchConsumer < Karafka::BaseConsumer
   def consume
     params_batch.to_a.each do |params_raw|
-      params = JSON.parse(params_raw[:value])
+      JSON.parse(params_raw[:value])
+
       @@count ||= 0
       @@starting_time = Time.now if @@count.zero?
       @@count += 1
