@@ -48,7 +48,7 @@ producer:
   max_buffer_bytesize: 10000000
   # name of the compression codec to use, or nil if no compression should be performed.
   # Valid codecs: `:snappy` and `:gzip`
-  compression_codec:
+  compression_codec: null
   # number of messages that needs to be in a message set before it should be compressed.
   # Note that message sets are per-partition rather than per-topic or per-producer
   compression_threshold: 1
