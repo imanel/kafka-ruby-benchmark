@@ -7,11 +7,11 @@ Each test is batch of 100k records, at least 10 batches per test.
 | Implementation   | Mean    | Std. Deviaton  | Ops/s  | Slower |
 | ---------------- | ------- | :------------: | :----: | :----: |
 | Kafka (Batch)    | 1.7135s | 0.1072 (6.26%) | 58 360 | 1.00x  |
+| Karafka (Batch)  | 2.2169s | 0.2456 (11.1%) | 45 108 | 1.29x  |
 | Kafka (Single)   | 2.4647s | 0.1449 (5.88%) | 40 573 | 1.44x  |
 | Phobos           | 2.6068s | 0.1234 (4.73%) | 38 361 | 1.52x  |
+| Karafka (Single) | 2.6166s | 0.2098 (8.02%) | 39 217 | 1.53x  |
 | Racecar          | 3.2057s | 0.1306 (4.07%) | 31 194 | 1.82x  |
-| Karafka (Batch)  | 5.6628s | 0.3167 (5.59%) | 17 659 | 3.30x  |
-| Karafka (Single) | 7.9192s | 0.2359 (2.98%) | 12 627 | 4.62x  |
 
 Benchmark of JSON vs AVRO, size 1 of JSON used for benchmarks above. If using AVRO or large messages just adjust above results by difference.
 
