@@ -2,4 +2,4 @@
 
 source 'http://rubygems.org'
 
-gem 'karafka'
+gem 'karafka', '1.2.0.beta2'

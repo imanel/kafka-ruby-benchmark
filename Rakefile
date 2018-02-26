@@ -1,8 +1,14 @@
-require 'avro_turf'
-require 'benchmark'
-require 'json'
-require 'kafka'
-require 'multi_json'
+# frozen_string_literal: true
+
+%w[
+  avro_turf
+  benchmark
+  json
+  kafka
+  multi_json
+].each(&method(:require))
+
+ENV['KAFKA_HOST'] ||= '127.0.0.1:9092'
 
 namespace :bench do
   desc 'Fill kafka with data for benchmark'
@@ -12,10 +18,10 @@ namespace :bench do
     message = { 'street' => '1st st.', 'city' => 'Citytown' }
     message_json = message.to_json
 
-    kafka = Kafka.new seed_brokers: ['127.0.0.1:9092'], client_id: 'my_producer'
+    kafka = Kafka.new seed_brokers: [ENV['KAFKA_HOST']], client_id: 'my_producer'
     producer = kafka.producer
     1_000.times do # Save 1M in batch of 1000 (limit for Kafka)
-      1_00.times do
+      1_000.times do
         producer.produce(message_json, topic: 'kafka_bench_json')
       end
       producer.deliver_messages

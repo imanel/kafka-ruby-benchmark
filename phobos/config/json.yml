@@ -13,20 +13,20 @@ kafka:
   # identifier for this application
   client_id: phobos
   # timeout setting for connecting to brokers
-  connect_timeout:
+  connect_timeout: null
   # timeout setting for socket connections
-  socket_timeout:
+  socket_timeout: null
   # PEM encoded CA cert to use with an SSL connection (string)
-  ssl_ca_cert:
+  ssl_ca_cert: null
   # PEM encoded client cert to use with an SSL connection (string)
   # Must be used in combination with ssl_client_cert_key
-  ssl_client_cert:
+  ssl_client_cert: null
   # PEM encoded client cert key to use with an SSL connection (string)
   # Must be used in combination with ssl_client_cert
-  ssl_client_cert_key:
+  ssl_client_cert_key: null
   # list of brokers used to initialize the client ("port:protocol")
   seed_brokers:
-    - localhost:9092
+    - <%= ENV['KAFKA_HOST'] || '127.0.0.1:9092' %>
 
 producer:
   # number of seconds a broker can wait for replicas to acknowledge
@@ -48,7 +48,7 @@ producer:
   max_buffer_bytesize: 10000000
   # name of the compression codec to use, or nil if no compression should be performed.
   # Valid codecs: `:snappy` and `:gzip`
-  compression_codec:
+  compression_codec: null
   # number of messages that needs to be in a message set before it should be compressed.
   # Note that message sets are per-partition rather than per-topic or per-producer
   compression_threshold: 1
@@ -81,7 +81,7 @@ listeners:
   - handler: JsonHandler
     topic: kafka_bench_json
     # id of the group that the consumer should join
-    group_id: kafka_bench_json
+    group_id: <%= "kafka_bench_json_#{Time.now.to_i}" %>
     # Number of threads created for this listener, each thread will behave as an independent consumer.
     # They don't share any state
     max_concurrency: 1
@@ -97,7 +97,7 @@ listeners:
     max_wait_time: 5
     # Apply this encoding to the message payload, if blank it uses the original encoding. This property accepts values
     # defined by the ruby Encoding class (https://ruby-doc.org/core-2.3.0/Encoding.html). Ex: UTF_8, ASCII_8BIT, etc
-    force_encoding:
+    force_encoding: null
     # Specify the delivery method for a listener.
     # Possible values: [`message`, `batch` (default)]
     #  - `message` will yield individual messages from Ruby Kafka using `each_message` and will commit/heartbeat at every consumed message.

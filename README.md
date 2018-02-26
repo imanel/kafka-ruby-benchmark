@@ -73,13 +73,19 @@ cd kafka
 bundle exec ruby batch.rb
 ```
 
-## Running Karafka Single
+## Running Karafka Batch
 
 ```
-cd karafka_single
+cd karafka/batch
 bundle exec karafka server
 ```
 
+## Running Karafka Single
+
+```
+cd karafka/single
+bundle exec karafka server
+```
 
 ## Running Phobos
 

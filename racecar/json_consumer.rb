@@ -1,13 +1,17 @@
-require 'json'
-require 'racecar'
+# frozen_string_literal: true
+
+%w[
+  json
+  racecar
+].each(&method(:require))
 
 class JsonConsumer < Racecar::Consumer
   subscribes_to 'kafka_bench_json'
 
   def process(message)
-    params = JSON.parse(message.value)
+    JSON.parse(message.value)
     @@count ||= 0
-    @@starting_time = Time.now if @@count == 0
+    @@starting_time = Time.now if @@count.zero?
     @@count += 1
 
     if @@count >= 100_000

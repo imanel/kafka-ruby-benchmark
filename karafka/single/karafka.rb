@@ -2,32 +2,29 @@
 
 ENV['RACK_ENV'] ||= 'development'
 ENV['KARAFKA_ENV'] ||= ENV['RACK_ENV']
+ENV['KAFKA_HOST'] ||= '127.0.0.1:9092'
+
 Bundler.require(:default, ENV['KARAFKA_ENV'])
 Karafka::Loader.load(Karafka::App.root)
 Karafka.logger.level = Logger::WARN
 
 require 'json'
 
-class JsonGemParser
-  def self.parse(message)
-    ::JSON.parse(message)
-  rescue ::JSON::JSONError => e
-    raise ::Karafka::Errors::ParserError, e
-  end
-end
-
 class KarafkaApp < Karafka::App
   setup do |config|
-    config.kafka.seed_brokers = %w[kafka://127.0.0.1:9092]
-    config.client_id = 'karafka_json_single'
-    config.backend = :inline
+    config.kafka.seed_brokers = ["kafka://#{ENV['KAFKA_HOST']}"]
+    config.client_id = "karafka_json_single_#{Time.now.to_i}"
     config.batch_fetching = true
-    config.parser = JsonGemParser
+    config.batch_consuming = false
   end
 
   consumer_groups.draw do
-    topic :kafka_bench_json do
-      controller ApplicationController
+    consumer_group :my_group do
+      automatically_mark_as_consumed false
+
+      topic :kafka_bench_json do
+        consumer BenchConsumer
+      end
     end
   end
 end

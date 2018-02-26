@@ -1,13 +1,17 @@
-require 'json'
-require 'phobos'
+# frozen_string_literal: true
+
+%w[
+  json
+  phobos
+].each(&method(:require))
 
 class JsonHandler
   include Phobos::Handler
 
-  def consume(payload, metadata)
-    params = JSON.parse(payload)
+  def consume(payload, _metadata)
+    JSON.parse(payload)
     @@count ||= 0
-    @@starting_time = Time.now if @@count == 0
+    @@starting_time = Time.now if @@count.zero?
     @@count += 1
 
     if @@count >= 100_000
