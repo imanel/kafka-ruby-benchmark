@@ -15,28 +15,12 @@ Each test is batch of 100k records, at least 10 batches per test.
 
 Benchmark of JSON vs AVRO, size 1 of JSON used for benchmarks above. If using AVRO or large messages just adjust above results by difference.
 
-|                                  | user      | system   | total     | real      |
-| -------------------------------- | --------: | -------: | --------: | --------: |
-| JSON size 1:                     |  0.280000 | 0.000000 |  0.280000 |  0.285331 |
-| MultiJSON size 1:                |  0.530000 | 0.000000 |  0.530000 |  0.531967 |
-| AVRO explicit schema size 1:     |  5.410000 | 0.010000 |  5.420000 |  5.467514 |
-| AVRO implicit schema size 1:     |  5.240000 | 0.000000 |  5.240000 |  5.246887 |
-| JSON size 10:                    |  0.260000 | 0.000000 |  0.260000 |  0.259881 |
-| MultiJSON size 10:               |  0.560000 | 0.000000 |  0.560000 |  0.560616 |
-| AVRO explicit schema size 10:    |  5.340000 | 0.010000 |  5.350000 |  5.345877 |
-| AVRO implicit schema size 10:    |  5.460000 | 0.000000 |  5.460000 |  5.481632 |
-| JSON size 100:                   |  0.520000 | 0.010000 |  0.530000 |  0.529220 |
-| MultiJSON size 100:              |  0.790000 | 0.010000 |  0.790000 |  0.791814 |
-| AVRO explicit schema size 100:   |  5.410000 | 0.000000 |  5.410000 |  5.413890 |
-| AVRO implicit schema size 100:   |  5.440000 | 0.000000 |  5.440000 |  5.447352 |
-| JSON size 1000:                  |  2.450000 | 0.110000 |  2.560000 |  2.562496 |
-| MultiJSON size 1000:             |  2.900000 | 0.110000 |  3.010000 |  3.039967 |
-| AVRO explicit schema size 1000:  |  5.650000 | 0.010000 |  5.660000 |  5.663500 |
-| AVRO implicit schema size 1000:  |  5.710000 | 0.000000 |  5.710000 |  5.715120 |
-| JSON size 10000:                 | 22.660000 | 1.850000 | 24.510000 | 24.578918 |
-| MultiJSON size 10000:            | 25.010000 | 2.140000 | 27.150000 | 27.899754 |
-| AVRO explicit schema size 10000: |  7.470000 | 0.210000 |  7.680000 |  7.689758 |
-| AVRO implicit schema size 10000: |  7.660000 | 0.200000 |  7.860000 |  7.890285 |
+|                       | Size 1   | Size 10  | Size 100 | Size 1000 | size 10000 |
+| ----------------------| -------: | -------: | -------: | --------: | ---------: |
+| JSON:                 | 0.285331 | 0.259881 | 0.529220 | 2.562496  | 24.578918  |
+| MultiJSON:            | 0.531967 | 0.560616 | 0.791814 | 3.039967  | 27.899754  |
+| AVRO explicit schema: | 5.467514 | 5.345877 | 5.413890 | 5.663500  |  7.689758  |
+| AVRO implicit schema: | 5.246887 | 5.481632 | 5.447352 | 5.715120  |  7.890285  |
 
 ## Running Kafka
 
